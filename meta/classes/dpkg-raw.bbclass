@@ -24,3 +24,7 @@ do_prepare_build() {
 
 	deb_debianize
 }
+
+# make sure templates are processed before do_install
+inherit template
+addtask do_transform_template after do_unpack before do_install
