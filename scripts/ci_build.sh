@@ -194,3 +194,10 @@ echo -e "do_fetch_append() {\n\n}" >> "${ISARROOT}/meta/classes/dpkg-base.bbclas
 bitbake $BB_ARGS mc:qemuamd64-stretch:isar-image-base
 
 mv "${ISARROOT}/meta/classes/dpkg-base.bbclass.ci-backup" "${ISARROOT}/meta/classes/dpkg-base.bbclass"
+
+cp -a "${ISARROOT}/meta-isar/scripts/lib/wic/canned-wks/sdimage-efi.wks" "${ISARROOT}/meta-isar/scripts/lib/wic/canned-wks/sdimage-efi.wks.ci-backup"
+sed -i -e 's/part \/ /part \/ --exclude-path usr /g' "${ISARROOT}/meta-isar/scripts/lib/wic/canned-wks/sdimage-efi.wks"
+
+bitbake $BB_ARGS mc:qemuamd64-stretch:isar-image-base
+
+mv "${ISARROOT}/meta-isar/scripts/lib/wic/canned-wks/sdimage-efi.wks.ci-backup" "${ISARROOT}/meta-isar/scripts/lib/wic/canned-wks/sdimage-efi.wks"
