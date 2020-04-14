@@ -236,3 +236,8 @@ downloads from previous builds for the cache.
 
 DTB_FILES now allows to specify multiple DTBs that should be deployed for
 consumption by imaging classes.
+
+### Separation of ${S} and ${D} in dpkg-raw
+
+${S} can now be used for checking out sources without being linked implicitly
+with ${D} which needs to be filled explicitly in do_install as before.
