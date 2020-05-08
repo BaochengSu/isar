@@ -298,6 +298,11 @@ isar_bootstrap() {
                                  "${ROOTFSDIR}/etc/apt/apt.conf.d/55isar-fallback.conf"
             fi
 
+            if [ -n "${DISTRO_APT_CONF_BUILDSTAGE}" ]; then
+                install -v -m644 "${WORKDIR}/${DISTRO_APT_CONF_BUILDSTAGE}" \
+                                  ${ROOTFSDIR}/etc/apt/apt.conf.d/51isar-build.conf"
+            fi
+
             # Set locale
             install -v -m644 "${WORKDIR}/locale" "${ROOTFSDIR}/etc/locale"
 
