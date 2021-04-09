@@ -18,6 +18,7 @@ PV = "1.0"
 DEBOOTSTRAP ?= "qemu-debootstrap"
 ROOTFSDIR = "${WORKDIR}/rootfs"
 APTPREFS = "${WORKDIR}/apt-preferences"
+APTCONFS = "${WORKDIR}/apt-confs"
 APTSRCS = "${WORKDIR}/apt-sources"
 APTSRCS_INIT = "${WORKDIR}/apt-sources-init"
 DISTRO_BOOTSTRAP_KEYFILES = ""
@@ -309,6 +310,8 @@ isar_bootstrap() {
             mkdir -p "${ROOTFSDIR}/etc/apt/apt.conf.d"
             install -v -m644 "${WORKDIR}/isar-apt.conf" \
                              "${ROOTFSDIR}/etc/apt/apt.conf.d/50isar.conf"
+            install -v -m644 "${APTCONFS}" \
+                             "${ROOTFSDIR}/etc/apt/apt.conf.d/bootstrap"
             find ${APT_KEYS_DIR}/ -type f | while read keyfile
             do
                 kfn="$(basename $keyfile)"

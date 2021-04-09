@@ -15,6 +15,8 @@ do_apt_config_prepare[dirs] = "${WORKDIR}"
 do_apt_config_prepare[vardeps] += "\
                                    APTPREFS \
                                    DISTRO_APT_PREFERENCES \
+                                   APTCONFS \
+                                   DISTRO_APT_CONFS \
                                    DEBDISTRONAME \
                                    APTSRCS \
                                    DISTRO_APT_SOURCES \
@@ -26,6 +28,12 @@ python do_apt_config_prepare() {
         d.getVar("DISTRO_APT_PREFERENCES", True) or ""
     ).split()
     aggregate_files(d, apt_preferences_list, apt_preferences_out)
+
+    apt_confs_out = d.getVar("APTCONFS", True)
+    apt_confs_list = (
+        d.getVar("DISTRO_APT_CONFS", True) or ""
+    ).split()
+    aggregate_files(d, apt_confs_list, apt_confs_out)
 
     apt_sources_out = d.getVar("APTSRCS", True)
     apt_sources_init_out = d.getVar("APTSRCS_INIT", True)
